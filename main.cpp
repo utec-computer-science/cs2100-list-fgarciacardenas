@@ -80,6 +80,14 @@ int main(int argc, const char * argv[]) {
     mySinglyList::List<int> arr_list(arr, size(arr));
     cout << "Array list: " << arr_list << endl;
 
+    // Print Stack values using iterator
+    mySinglyList::List<int>::iterator it_s;
+    cout << "Singly reversed list values by iterator: ";
+    for(it_s = random_list.begin() ; it_s != random_list.end() ; ++it_s){
+        cout << *it_s << " ";
+    }
+    cout << "\n";
+
     // ---------------------- DOUBLY LINKED LIST ---------------------- //
 
     // Doubly Linked List initilizer
@@ -149,6 +157,14 @@ int main(int argc, const char * argv[]) {
     int arr2[] = {1,2,3,4,5};
     myDoublyList::List<int> arr_dlist(arr2, size(arr2));
     cout << "Array list: " << arr_dlist << endl;
+
+    // Print Stack values using iterator
+    myDoublyList::List<int>::iterator it_d;
+    cout << "Doubly reversed list values by iterator: ";
+    for(it_d = random_dlist.begin() ; it_d != random_dlist.end() ; ++it_d){
+        cout << *it_d << " ";
+    }
+    cout << "\n";
 
     // ---------------------- CIRCULAR LINKED LIST ---------------------- //
 
@@ -220,6 +236,16 @@ int main(int argc, const char * argv[]) {
     myCircularList::List<int> arr_clist(arr3, size(arr3));
     cout << "Array list: " << arr_clist << endl;
 
+    // Print Stack values using iterator
+    myCircularList::List<int>::iterator it_c;
+    cout << "Circular reversed list values by iterator: ";
+    it_c = random_clist.begin();
+    do {
+        cout << *it_c << " ";
+        ++it_c;
+    } while (it_c != random_clist.end());
+    cout << "\n";
+
     // ---------------------- CIRCULAR DOUBLY LINKED LIST ---------------------- //
 
     // Circular Doubly Linked List initilizer
@@ -289,4 +315,14 @@ int main(int argc, const char * argv[]) {
     int arr4[] = {1,2,3,4,5};
     myCircularDList::List<int> arr_cdlist(arr4, size(arr4));
     cout << "Array list: " << arr_cdlist << endl;
+
+    // Print Stack values using iterator
+    myCircularDList::List<int>::iterator it_cd;
+    cout << "Doubly Circular reversed list values by iterator: ";
+    it_cd = random_cdlist.begin();
+    do {
+        cout << *it_cd << " ";
+        ++it_cd;
+    } while (it_cd != random_cdlist.end());
+    cout << "\n";
 }

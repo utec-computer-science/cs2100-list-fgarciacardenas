@@ -10,6 +10,54 @@ using namespace std;
 
 namespace myCircularList {
     template <typename T>
+    class iterator {
+        private:
+            typedef Node<T> Node;
+            Node * pointer;
+            
+        public:
+            iterator(){ pointer = nullptr; }
+            iterator(Node * ptr) { this->pointer = ptr; }
+            
+            void operator ++(){
+                this->pointer = this->pointer->next;
+            }
+
+            void operator ++(int n){
+                for (int i = 0; i < n; ++i)
+                    this->pointer = this->pointer->next;
+            }
+            
+            T operator * (){
+                return this->pointer->value;
+            }
+            
+            bool operator == (const iterator & it){
+                return this->pointer == it.pointer;
+            }
+            
+            bool operator != (const iterator & it){
+                return this->pointer != it.pointer;
+            }
+
+            bool operator <= (const iterator & it){
+                return this->pointer <= it.pointer;
+            }
+
+            bool operator >= (const iterator & it){
+                return this->pointer >= it.pointer;
+            }
+
+            bool operator < (const iterator & it){
+                return this->pointer < it.pointer;
+            }
+
+            bool operator > (const iterator & it){
+                return this->pointer > it.pointer;
+            }
+    };
+    
+    template <typename T>
     class List {
         protected:
             typedef Node<T> Node;
@@ -19,6 +67,8 @@ namespace myCircularList {
             unsigned int length = 0;
 
         public:
+            typedef iterator<T> iterator;
+            
             // Copy constructor: Builds a list based on another list
             List(List* List){ 
                 Node * ptr = List.head;
@@ -251,6 +301,15 @@ namespace myCircularList {
                     ptr = ptr->next;
                 } while (ptr != List.head);
                 return os;
+            }
+
+            // Funciones del iterador
+            iterator begin(){
+                return iterator(head);
+            }
+            
+            iterator end() {
+                return iterator(head);
             }
     };
 }

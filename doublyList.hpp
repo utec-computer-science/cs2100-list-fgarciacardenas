@@ -10,6 +10,63 @@ using namespace std;
 
 namespace myDoublyList {
     template <typename T>
+    class iterator {
+        private:
+            typedef Node2<T> Node;
+            Node * pointer;
+            
+        public:
+            iterator(){ pointer = nullptr; }
+            iterator(Node * ptr) { this->pointer = ptr; }
+            
+            void operator ++(){
+                this->pointer = this->pointer->next;
+            }
+
+            void operator ++(int n){
+                for (int i = 0; i < n; ++i)
+                    this->pointer = this->pointer->next;
+            }
+
+            void operator --(){
+                this->pointer = this->pointer->prev;
+            }
+
+            void operator --(int n){
+                for (int i = 0; i < n; ++i)
+                    this->pointer = this->pointer->prev;
+            }
+            
+            T operator * (){
+                return this->pointer->value;
+            }
+            
+            bool operator == (const iterator & it){
+                return this->pointer == it.pointer;
+            }
+            
+            bool operator != (const iterator & it){
+                return this->pointer != it.pointer;
+            }
+
+            bool operator <= (const iterator & it){
+                return this->pointer <= it.pointer;
+            }
+
+            bool operator >= (const iterator & it){
+                return this->pointer >= it.pointer;
+            }
+
+            bool operator < (const iterator & it){
+                return this->pointer < it.pointer;
+            }
+
+            bool operator > (const iterator & it){
+                return this->pointer > it.pointer;
+            }
+    };
+    
+    template <typename T>
     class List {
         protected:
             typedef Node2<T> Node;
@@ -19,6 +76,8 @@ namespace myDoublyList {
             unsigned int length = 0;
 
         public:
+            typedef iterator<T> iterator;
+            
             // Copy constructor: Builds a list based on another list
             List(List* List){ 
                 Node * ptr = List.head;
@@ -241,6 +300,15 @@ namespace myDoublyList {
                     ptr = ptr->next;
                 }
                 return os;
+            }
+
+            // Funciones del iterador
+            iterator begin(){
+                return iterator(head);
+            }
+            
+            iterator end() {
+                return iterator(nullptr);
             }
     };
 }
