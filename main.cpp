@@ -285,4 +285,7 @@ int main(int argc, const char * argv[]) {
     float arr4[] = {1.0,2.0,3.0,4.0,5.0};
     dclist_t arr_cdlist(arr4, sizeof(arr4)/sizeof(arr4[0]));
     cout << "Array list: " << arr_cdlist << endl;
+	
+	// Finish the program
+	return 0;
 }
