@@ -1,12 +1,8 @@
 #include <iostream>
-#include "node.hpp"
-#include "node2.hpp"
-#include "singlyList.hpp"
-#include "doublyList.hpp"
-#include "circularList.hpp"
-#include "circularDList.hpp"
+#include "lists.hpp"
 
 using namespace std;
+using namespace myList;
 
 int main(int argc, const char * argv[]) {
     
@@ -14,11 +10,11 @@ int main(int argc, const char * argv[]) {
     
     // Single Linked List initilizer
     cout << endl << "// ------------ SINGLY LINKED LIST TEST ------------ //" << endl;
-    mySinglyList::List<int> list;
+    list_t list;
 
     // Insert values into Singly Linked List
-    list.push_front(55); list.push_front(38); list.push_front(27);
-    list.push_back(72); list.push_back(9); list.push_back(43);
+    list >> 55 >> 38 >> 27;
+    list << 72 << 9 << 43;
     
     // Reference to first element
     cout << "First element: " << list.front() << endl;
@@ -34,11 +30,11 @@ int main(int argc, const char * argv[]) {
     cout << "Singly List values: " << list << endl;
 
     // Random access
-    Node<int> *snode = list[2];
-    cout << "Random access dir: " << snode << ", value: " << snode->value << endl;
+    auto snode = list[2];
+    cout << "Random access dir [2]: " << snode->value << ", p: " << &snode << endl;
 
     // Check if list is empty
-    cout << "Is the list empty?: " << boolalpha << list.isEmpty() << endl;
+    cout << "Is the list empty?: " << boolalpha << list.empty() << endl;
 
     // Print size of the list
     cout << "Size of the list: " << list.size() << endl;
@@ -51,7 +47,7 @@ int main(int argc, const char * argv[]) {
     list.remove(3);
     cout << "List w/o repeating values: " << list << endl;
 
-    // Erase an element
+    // // Erase an element
     list.erase(snode);
     cout << "List after erasing element: " << list << endl;
 
@@ -60,9 +56,9 @@ int main(int argc, const char * argv[]) {
     cout << "Size of cleared list: " << list.size() << endl;
 
     // Create a random list
-    mySinglyList::List<int> random_list(5);
+    list_t random_list(5);
     cout << "Random list: " << random_list << endl;
-
+    
     // Sort the list
     random_list.sort();
     cout << "Sorted list: " << random_list << endl;
@@ -72,27 +68,19 @@ int main(int argc, const char * argv[]) {
     cout << "Reversed list: " << random_list << endl;
 
     // Copy the list
-    mySinglyList::List<int> copy_list(random_list);
+    list_t copy_list(random_list);
     cout << "Copied list: " << copy_list << endl;
 
     // Create a list based on an array
-    int arr[] = {1,2,3,4,5};
-    mySinglyList::List<int> arr_list(arr, size(arr));
+    float arr[] = {1.0,2.0,3.0,4.0,5.0};
+    list_t arr_list(arr, size(arr));
     cout << "Array list: " << arr_list << endl;
-
-    // Print Stack values using iterator
-    mySinglyList::List<int>::iterator it_s;
-    cout << "Singly reversed list values by iterator: ";
-    for(it_s = random_list.begin() ; it_s != random_list.end() ; ++it_s){
-        cout << *it_s << " ";
-    }
-    cout << "\n";
 
     // ---------------------- DOUBLY LINKED LIST ---------------------- //
 
     // Doubly Linked List initilizer
     cout << endl << "// ------------ DOUBLY LINKED LIST TEST ------------ //" << endl;
-    myDoublyList::List<int> dlist;
+    dlist_t dlist;
 
     // Insert values into Doubly Linked List
     dlist.push_front(11); dlist.push_front(34); dlist.push_front(6);
@@ -112,11 +100,11 @@ int main(int argc, const char * argv[]) {
     cout << "Doubly List values: " << dlist << endl;
 
     // Random access
-    Node2<int> *dnode = dlist[2];
-    cout << "Random access dir: " << dnode << ", value: " << dnode->value << endl;
+    auto dnode = dlist[2];
+    cout << "Random access dir [2]: " << dnode->value << ", p: " << &dnode << endl;
 
     // Check if list is empty
-    cout << "Is the list empty?: " << boolalpha << dlist.isEmpty() << endl;
+    cout << "Is the list empty?: " << boolalpha << dlist.empty() << endl;
 
     // Print size of the list
     cout << "Size of the list: " << dlist.size() << endl;
@@ -138,7 +126,7 @@ int main(int argc, const char * argv[]) {
     cout << "Size of cleared list: " << dlist.size() << endl;
 
     // Create a random list
-    myDoublyList::List<int> random_dlist(5);
+    dlist_t random_dlist(5);
     cout << "Random list: " << random_dlist << endl;
 
     // Sort the list
@@ -150,31 +138,23 @@ int main(int argc, const char * argv[]) {
     cout << "Reversed list: " << random_dlist << endl;
 
     // Copy the list
-    myDoublyList::List<int> copy_dlist(random_dlist);
+    dlist_t copy_dlist(random_dlist);
     cout << "Copied list: " << copy_dlist << endl;
 
     // Create a list based on an array
-    int arr2[] = {1,2,3,4,5};
-    myDoublyList::List<int> arr_dlist(arr2, size(arr2));
+    float arr2[] = {6.0,7.0,8.0,9.0,10.0};
+    dlist_t arr_dlist(arr2, size(arr2));
     cout << "Array list: " << arr_dlist << endl;
-
-    // Print Stack values using iterator
-    myDoublyList::List<int>::iterator it_d;
-    cout << "Doubly reversed list values by iterator: ";
-    for(it_d = random_dlist.begin() ; it_d != random_dlist.end() ; ++it_d){
-        cout << *it_d << " ";
-    }
-    cout << "\n";
 
     // ---------------------- CIRCULAR LINKED LIST ---------------------- //
 
     // Circular Linked List initilizer
     cout << endl << "// ------------ CIRCULAR LINKED LIST TEST ------------ //" << endl;
-    myCircularList::List<int> clist;
+    clist_t clist;
 
     // Insert values into Circular Linked List
-    clist.push_front(84); clist.push_front(92); clist.push_front(70);
-    clist.push_back(61); clist.push_back(46); clist.push_back(25);
+    clist >> 84 >> 92 >> 70;
+    clist << 61 << 46 << 25;
     
     // Reference to first element
     cout << "First element: " << clist.front() << endl;
@@ -190,11 +170,11 @@ int main(int argc, const char * argv[]) {
     cout << "Circular List values: " << clist << endl;
 
     // Random access
-    Node<int> *cnode = clist[2];
+    auto cnode = clist[2];
     cout << "Random access dir: " << cnode << ", value: " << cnode->value << endl;
 
     // Check if list is empty
-    cout << "Is the list empty?: " << boolalpha << clist.isEmpty() << endl;
+    cout << "Is the list empty?: " << boolalpha << clist.empty() << endl;
 
     // Print size of the list
     cout << "Size of the list: " << clist.size() << endl;
@@ -216,7 +196,7 @@ int main(int argc, const char * argv[]) {
     cout << "Size of cleared list: " << clist.size() << endl;
 
     // Create a random list
-    myCircularList::List<int> random_clist(5);
+    clist_t random_clist(5);
     cout << "Random list: " << random_clist << endl;
 
     // Sort the list
@@ -228,29 +208,19 @@ int main(int argc, const char * argv[]) {
     cout << "Reversed list: " << random_clist << endl;
 
     // Copy the list
-    myCircularList::List<int> copy_clist(random_clist);
+    clist_t copy_clist(random_clist);
     cout << "Copied list: " << copy_clist << endl;
 
     // Create a list based on an array
-    int arr3[] = {1,2,3,4,5};
-    myCircularList::List<int> arr_clist(arr3, size(arr3));
+    float arr3[] = {2.0,4.0,6.0,8.0,10.0};
+    clist_t arr_clist(arr3, size(arr3));
     cout << "Array list: " << arr_clist << endl;
-
-    // Print Stack values using iterator
-    myCircularList::List<int>::iterator it_c;
-    cout << "Circular reversed list values by iterator: ";
-    it_c = random_clist.begin();
-    do {
-        cout << *it_c << " ";
-        ++it_c;
-    } while (it_c != random_clist.end());
-    cout << "\n";
 
     // ---------------------- CIRCULAR DOUBLY LINKED LIST ---------------------- //
 
     // Circular Doubly Linked List initilizer
     cout << endl << "// ------------ CIRCULAR DOUBLY LINKED LIST TEST ------------ //" << endl;
-    myCircularDList::List<int> cdlist;
+    dclist_t cdlist;
 
     // Insert values into Circular Doubly Linked List
     cdlist.push_front(51); cdlist.push_front(12); cdlist.push_front(26);
@@ -270,11 +240,11 @@ int main(int argc, const char * argv[]) {
     cout << "Circular Doubly List values: " << cdlist << endl;
 
     // Random access
-    Node2<int> *cdnode = cdlist[2];
+    auto cdnode = cdlist[2];
     cout << "Random access dir: " << cdnode << ", value: " << cdnode->value << endl;
 
     // Check if list is empty
-    cout << "Is the list empty?: " << boolalpha << cdlist.isEmpty() << endl;
+    cout << "Is the list empty?: " << boolalpha << cdlist.empty() << endl;
 
     // Print size of the list
     cout << "Size of the list: " << cdlist.size() << endl;
@@ -296,7 +266,7 @@ int main(int argc, const char * argv[]) {
     cout << "Size of cleared list: " << cdlist.size() << endl;
 
     // Create a random list
-    myCircularDList::List<int> random_cdlist(5);
+    dclist_t random_cdlist(5);
     cout << "Random list: " << random_cdlist << endl;
 
     // Sort the list
@@ -308,21 +278,11 @@ int main(int argc, const char * argv[]) {
     cout << "Reversed list: " << random_cdlist << endl;
 
     // Copy the list
-    myCircularDList::List<int> copy_cdlist(random_cdlist);
+    dclist_t copy_cdlist(random_cdlist);
     cout << "Copied list: " << copy_cdlist << endl;
 
     // Create a list based on an array
-    int arr4[] = {1,2,3,4,5};
-    myCircularDList::List<int> arr_cdlist(arr4, size(arr4));
+    float arr4[] = {1.0,2.0,3.0,4.0,5.0};
+    dclist_t arr_cdlist(arr4, size(arr4));
     cout << "Array list: " << arr_cdlist << endl;
-
-    // Print Stack values using iterator
-    myCircularDList::List<int>::iterator it_cd;
-    cout << "Doubly Circular reversed list values by iterator: ";
-    it_cd = random_cdlist.begin();
-    do {
-        cout << *it_cd << " ";
-        ++it_cd;
-    } while (it_cd != random_cdlist.end());
-    cout << "\n";
 }
