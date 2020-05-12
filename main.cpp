@@ -73,7 +73,7 @@ int main(int argc, const char * argv[]) {
 
     // Create a list based on an array
     float arr[] = {1.0,2.0,3.0,4.0,5.0};
-    list_t arr_list(arr, size(arr));
+    list_t arr_list(arr, sizeof(arr)/sizeof(arr[0]));
     cout << "Array list: " << arr_list << endl;
 
     // ---------------------- DOUBLY LINKED LIST ---------------------- //
@@ -143,7 +143,7 @@ int main(int argc, const char * argv[]) {
 
     // Create a list based on an array
     float arr2[] = {6.0,7.0,8.0,9.0,10.0};
-    dlist_t arr_dlist(arr2, size(arr2));
+    dlist_t arr_dlist(arr2, sizeof(arr2)/sizeof(arr2[0]));
     cout << "Array list: " << arr_dlist << endl;
 
     // ---------------------- CIRCULAR LINKED LIST ---------------------- //
@@ -213,7 +213,7 @@ int main(int argc, const char * argv[]) {
 
     // Create a list based on an array
     float arr3[] = {2.0,4.0,6.0,8.0,10.0};
-    clist_t arr_clist(arr3, size(arr3));
+    clist_t arr_clist(arr3, sizeof(arr3)/sizeof(arr3[0]));
     cout << "Array list: " << arr_clist << endl;
 
     // ---------------------- CIRCULAR DOUBLY LINKED LIST ---------------------- //
@@ -283,6 +283,6 @@ int main(int argc, const char * argv[]) {
 
     // Create a list based on an array
     float arr4[] = {1.0,2.0,3.0,4.0,5.0};
-    dclist_t arr_cdlist(arr4, size(arr4));
+    dclist_t arr_cdlist(arr4, sizeof(arr4)/sizeof(arr4[0]));
     cout << "Array list: " << arr_cdlist << endl;
 }

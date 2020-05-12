@@ -21,7 +21,7 @@ namespace myList {
             Node(const value_t& _value = NULL) : value(_value) {}
 
             // Default destructor
-            ~Node(){ value = NULL; }
+            ~Node(){}
 
             // Override operator *
             value_t& operator*(){
@@ -232,13 +232,15 @@ namespace myList {
 
         public:
             // Copy constructor: Builds a list based on another list
-            List(Iterator * _list){ 
+            List(List &_list){ 
                 node_t * ptr = _list.head;
                 int i = 0;
                 while (ptr != nullptr) {
                     push_front(_list[i]->value);
                     ptr = ptr->next;
                     ++i;
+                    if (ptr == _list.head)
+                        return;
                 }
             }
             
@@ -338,12 +340,6 @@ namespace myList {
                 __reverse__<NodeTraits<node_t,value_t>::nodeType>(head_pointer,tail_pointer);
             }
 
-            void print() {
-                node_t ** head_pointer = &head;
-                node_t ** tail_pointer = &tail;
-                __print__<NodeTraits<node_t,value_t>::nodeType>(head_pointer,tail_pointer);
-            }
-
             size_t size() {
                 node_t ** head_pointer = &head;
                 node_t ** tail_pointer = &tail;
@@ -423,7 +419,7 @@ namespace myList {
             static void reverse(Node** &head, Node** &tail) {
                 cout << "Trait type was not defined" << endl;
             }
-            static unsigned int reverse(Node** &head, Node** &tail) {
+            static unsigned int size(Node** &head, Node** &tail) {
                 cout << "Trait type was not defined" << endl;
             }
     };
